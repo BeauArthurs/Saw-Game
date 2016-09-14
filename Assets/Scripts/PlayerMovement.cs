@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
         MoveForward(); // Player Movement 
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject == GameObject.FindGameObjectWithTag("Death"))
         {
