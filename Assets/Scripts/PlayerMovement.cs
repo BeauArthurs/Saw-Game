@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MoveForward(); // Player Movement 
+        BulletSlow();
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -17,7 +18,17 @@ public class PlayerMovement : MonoBehaviour
             Death();
         }
     }
-
+    void BulletSlow()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Time.timeScale = .5f;
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            Time.timeScale = 1;
+        }
+    }
     void Death()
     {
         Destroy(this.gameObject);
