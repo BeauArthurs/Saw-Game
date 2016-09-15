@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]float playerSpeed = 10; //speed player moves
+    [SerializeField]Image mainimage;
 
     void Update()
     {
@@ -32,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     void Death()
     {
         Destroy(this.gameObject);
-        //start endscreen
+        mainimage.gameObject.SetActive(true);
     }
 
     void MoveForward()
