@@ -42,84 +42,86 @@ public class score : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            string First = ABC[FirstLetter];
+            string Second = ABC[SecondLetter];
+            string Therd = ABC[TherdLetter];
+            SaveScore(First + Second + Therd);
+            mainimage.gameObject.SetActive(false);
+        }
+
         if (mainimage.isActiveAndEnabled == false)
         {
             time = (int)Time.time;
             timer.text = time.ToString();
         }
 
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            string First = ABC[FirstLetter];
-            string Second = ABC[SecondLetter];
-            string Therd = ABC[TherdLetter];
-            SaveScore(First+Second+Therd);
-            mainimage.gameObject.SetActive(false);
 
-        }
+        if (mainimage.isActiveAndEnabled == true)
+        {
+            if (box1 == true)
+            {
+                Blockje.gameObject.SetActive(true);
+                Blockje2.gameObject.SetActive(false);
+                Blockje3.gameObject.SetActive(false);
+            }
+            if (box2 == true)
+            {
+                Blockje.gameObject.SetActive(false);
+                Blockje2.gameObject.SetActive(true);
+                Blockje3.gameObject.SetActive(false);
+            }
+            if (box3 == true)
+            {
+                Blockje.gameObject.SetActive(false);
+                Blockje2.gameObject.SetActive(false);
+                Blockje3.gameObject.SetActive(true);
+            }
 
-        if (box1 == true)
-        {
-            Blockje.gameObject.SetActive(true);
-            Blockje2.gameObject.SetActive(false);
-            Blockje3.gameObject.SetActive(false);
-        }
-        if (box2 == true)
-        {
-            Blockje.gameObject.SetActive(false);
-            Blockje2.gameObject.SetActive(true);
-            Blockje3.gameObject.SetActive(false);
-        }
-        if (box3 == true)
-        {
-            Blockje.gameObject.SetActive(false);
-            Blockje2.gameObject.SetActive(false);
-            Blockje3.gameObject.SetActive(true);
-        }
+            if (CurrentLetter == 1 && Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                CurrentLetter = 2;
+                box1 = false;
+                box2 = true;
+                box3 = false;
 
-        if (CurrentLetter == 1 && Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            CurrentLetter = 2;
-            box1 = false;
-            box2 = true;
-            box3 = false;
-
-        }
-        else if (CurrentLetter == 2 && Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            CurrentLetter = 3;
-            box1 = false;
-            box2 = false;
-            box3 = true;
-        }
-        else if (CurrentLetter == 3 && Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            CurrentLetter = 1;
-            box1 = true;
-            box2 = false;
-            box3 = false;
-        }
-        else if (CurrentLetter == 1 && Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            CurrentLetter = 3;
-            box1 = false;
-            box2 = false;
-            box3 = true;
-        }
-        else if (CurrentLetter == 2 && Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            CurrentLetter = 1;
-            box1 = true;
-            box2 = false;
-            box3 = false;
-        }
-        else if (CurrentLetter == 3 && Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            CurrentLetter = 2;
-            box1 = false;
-            box2 = true;
-            box3 = false;
-        }
+            }
+            else if (CurrentLetter == 2 && Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                CurrentLetter = 3;
+                box1 = false;
+                box2 = false;
+                box3 = true;
+            }
+            else if (CurrentLetter == 3 && Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                CurrentLetter = 1;
+                box1 = true;
+                box2 = false;
+                box3 = false;
+            }
+            else if (CurrentLetter == 1 && Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                CurrentLetter = 3;
+                box1 = false;
+                box2 = false;
+                box3 = true;
+            }
+            else if (CurrentLetter == 2 && Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                CurrentLetter = 1;
+                box1 = true;
+                box2 = false;
+                box3 = false;
+            }
+            else if (CurrentLetter == 3 && Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                CurrentLetter = 2;
+                box1 = false;
+                box2 = true;
+                box3 = false;
+            }
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -129,6 +131,7 @@ public class score : MonoBehaviour {
             {
                 UpdateText(CurrentLetter, -1);
             }
+        }
     }
 
     void UpdateText(int letter, int Direction)
@@ -182,7 +185,7 @@ public class score : MonoBehaviour {
         {
             FileStream fs = new FileStream(filename, FileMode.Append, FileAccess.Write);
             StreamWriter sr = new StreamWriter(fs);
-            sr.WriteLine(name + "." + timer.text);   
+            sr.WriteLine(name + "." + timer.text + ",");   
             sr.Close();
         }
     }
